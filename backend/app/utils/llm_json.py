@@ -1,7 +1,6 @@
 import json
 import re
-from typing import Tuple
-
+from typing import Tuple, Optional
 from app.models.extraction_schema import ExtractionResult
 
 
@@ -47,7 +46,7 @@ def parse_and_validate_extraction(raw_model_output: str) -> ExtractionResult:
         raise LLMJSONError(f"Schema validation failed: {e}") from e
 
 
-def try_parse_extraction(raw_model_output: str) -> Tuple[bool, ExtractionResult | None, str | None]:
+def try_parse_extraction(raw_model_output: str) -> Tuple[bool, Optional[ExtractionResult], Optional[str]]:
     """
     Non-throwing helper for APIs:
     - ok=True returns (True, result, None)
